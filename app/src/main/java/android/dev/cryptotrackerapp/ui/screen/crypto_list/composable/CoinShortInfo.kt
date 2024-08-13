@@ -53,7 +53,7 @@ fun CoinShortInfo(
             )
             CoinStatBlock(
                 code = coin.symbol ?: "",
-                percent = coin.priceChangePercentage24h ?: 0.0,
+                percent = "%.2f".format(coin.priceChangePercentage24h ?: 0.0)
             )
         }
     }
@@ -77,10 +77,10 @@ private fun CoinNameBlock(
 @Composable
 private fun CoinStatBlock(
     code: String,
-    percent: Double,
+    percent: String,
 ) {
-    val color = if (percent >= 0) SignalGreen else SignalRed
-    val percentSign = if (percent >= 0) "+" else ""
+    val color = if (percent >= 0.toString()) SignalGreen else SignalRed
+    val percentSign = if (percent >= 0.toString()) "+" else ""
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth()
@@ -95,7 +95,7 @@ private fun CoinStatBlock(
             style = typography.body.body3.copy(color),
             textAlign = TextAlign.Right
         )
-    } // todo: обработать цвет
+    }
 }
 
 @Preview

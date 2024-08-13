@@ -3,7 +3,8 @@ package android.dev.cryptotrackerapp.ui.screen.crypto_list
 import android.dev.cryptotrackerapp.ui.screen.crypto_list.composable.CoinShortInfo
 import android.dev.cryptotrackerapp.ui.screen.crypto_list.crypto_list_orbit.CoinListAction
 import android.dev.cryptotrackerapp.ui.screen.crypto_list.crypto_list_orbit.CoinListState
-import android.dev.cryptotrackerapp.ui.theme.components.AppChip
+import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme
+import android.dev.cryptotrackerapp.ui.theme.components.CryptoChip
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 
@@ -42,11 +44,13 @@ fun CryptoListScreen(
     }
 
     Column(modifier) {
-        AppChip(
+        CryptoChip(
             selectedItem = state.tab,
             items = state.tabList,
             onItemClick = remember { { tab -> onAction(CoinListAction.UpdateTab(tab)) } },
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+            onClick = {}
+
         )
         HorizontalDivider(thickness = 2.dp, color = Color.LightGray)
         Box(
@@ -72,11 +76,20 @@ fun CryptoListScreen(
                 state = containerState,
                 containerColor = Color.Transparent,
                 modifier = Modifier.align(Alignment.TopCenter)
-            ) // TODO: Добавить индикатор загрузки
+            )
         }
 
     }
 
 }
 
-//TODO#4 Сделать превью
+@Preview
+@Composable
+fun CryptoListScreenPreview() {
+    ApplicationTheme {
+        CryptoListScreen(
+            state = CoinListState(),
+            onAction = {}
+        )
+    }
+}

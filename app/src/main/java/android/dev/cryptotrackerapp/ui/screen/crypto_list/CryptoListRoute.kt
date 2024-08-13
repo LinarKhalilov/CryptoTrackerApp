@@ -4,11 +4,16 @@ import android.dev.cryptotrackerapp.R
 import android.dev.cryptotrackerapp.ui.screen.crypto_list.crypto_list_orbit.CoinListAction
 import android.dev.cryptotrackerapp.ui.screen.crypto_list.crypto_list_orbit.CoinListSideEffect
 import android.dev.cryptotrackerapp.ui.screen.crypto_list.crypto_list_orbit.UIState
+import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme
 import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme.typography
 import android.dev.cryptotrackerapp.ui.theme.components.handle.ErrorScreen
+import android.dev.cryptotrackerapp.ui.theme.components.handle.LoadingScreen
+import android.dev.cryptotrackerapp.ui.theme.palette.SignalRed
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -19,8 +24,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 
@@ -39,14 +46,22 @@ fun CryptoListRoute(
             viewModel.container.sideEffectFlow.collect { effect ->
                 when (effect) {
                     is CoinListSideEffect.NavigateToDetail -> navigateToDetail(effect.cryptoId)
-                    is CoinListSideEffect.ShowErrorSnack -> snackBarHostState.showSnackbar(effect.message)
+                    is CoinListSideEffect.ShowErrorSnack -> snackBarHostState.showSnackbar(
+                        message = "Произошла ошибка при загрузке",
+                        duration = SnackbarDuration.Short)  //TODO#3 временный костыль , snackbar должен выводить ошибку
                 }
             }
         }
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) { data ->
+            Snackbar(
+                snackbarData = data,
+                containerColor = SignalRed,
+                contentColor = Color.White
+            )
+        }},
         topBar = {
             TopAppBar(
                 title = {
@@ -73,11 +88,19 @@ fun CryptoListRoute(
                     onRetry = remember { { viewModel.action(CoinListAction.OnRefresh) } }
                 )
 
-                UIState.Loading -> Unit // TODO#3 Добавить LoadingScreen(Modifier.padding(padding)
+                UIState.Loading -> LoadingScreen(Modifier.padding())
             }
 
         }
     )
 }
 
-//TODO#4 Сделать превью
+@Preview
+@Composable
+fun CryptoListRoutePreview() {
+    ApplicationTheme {
+        CryptoListRoute(
+            navigateToDetail = {}
+        )
+    }
+}

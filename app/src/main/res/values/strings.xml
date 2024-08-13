@@ -5,4 +5,5 @@
     <string name="coin_details_categories">Категории</string>
     <string name="some_error">Произошла какая-то ошибка :( \n Попробуем снова?</string>
     <string name="try_again">ПОПРОБОВАТЬ</string>
+    <string name="snackbar_error">Произошла ошибка при загрузке</string>
 </resources>

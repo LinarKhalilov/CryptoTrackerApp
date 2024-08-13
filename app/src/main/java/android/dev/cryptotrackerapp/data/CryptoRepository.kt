@@ -24,4 +24,4 @@ class CryptoRepository@Inject constructor(
             api.getCoinDetails(id)
         }
     }
-} // todo: Добавить кеширование данных
+} // TODO#1: Добавить кеширование данных

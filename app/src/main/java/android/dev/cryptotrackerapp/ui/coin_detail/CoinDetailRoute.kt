@@ -2,8 +2,10 @@ package android.dev.cryptotrackerapp.ui.coin_detail
 
 import android.dev.cryptotrackerapp.ui.coin_detail.detail_orbit.CoinDetailAction
 import android.dev.cryptotrackerapp.ui.screen.crypto_list.crypto_list_orbit.UIState
+import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme
 import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme.typography
 import android.dev.cryptotrackerapp.ui.theme.components.handle.ErrorScreen
+import android.dev.cryptotrackerapp.ui.theme.components.handle.LoadingScreen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -63,7 +66,7 @@ fun CoinDetailRoute(
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                HorizontalDivider(modifier = Modifier.shadow(2.dp)) // todo: Заменить на elevation
+                HorizontalDivider(modifier = Modifier.shadow(2.dp)) // TODO#2: Заменить на elevation
             }
         },
 
@@ -88,7 +91,7 @@ fun CoinDetailRoute(
                     } }
                     )
 
-                    UIState.Loading -> Unit // TODO#3 Добавить LoadingScreen(Modifier.padding(padding)
+                    UIState.Loading -> LoadingScreen(Modifier.padding())
                 }
             }
         }
@@ -96,4 +99,10 @@ fun CoinDetailRoute(
 
 }
 
-//TODO#4 Сделать превью
+@Preview
+@Composable
+fun CoinDetailRoutePreview() {
+    ApplicationTheme {
+        CoinDetailRoute(navigateBack = {})
+    }
+}

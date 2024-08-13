@@ -46,7 +46,7 @@ class CryptoListViewModel @Inject constructor(
     }
 
     private fun loadCoins(currency : String? = null) = intent {
-        // TODO: #1 Добавить прогрессбар reduce { state.copy(state = UIState.Loading) }
+        reduce { state.copy(state = UIState.Loading) }
         val currencyString = currency ?: state.tab.name.lowercase()
         cryptoApi.getList(currencyString)
         cryptoApi.getList(currencyString)

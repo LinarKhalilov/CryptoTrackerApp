@@ -30,7 +30,7 @@ class CoinDetailsViewModel@AssistedInject constructor(
 
     private fun loadCoinDetails(id: String) {
         intent {
-            // TODO: #1 Добавить прогрессбар reduce { state.copy(state = UIState.Loading) }
+            reduce { state.copy(state = UIState.Loading) }
             repository.getCoinDetails(id)
                 .onSuccess { reduce { state.copy(coinDetails = it, state = UIState.Idle) } }
                 .onError { reduce { state.copy(state = UIState.Error) } }

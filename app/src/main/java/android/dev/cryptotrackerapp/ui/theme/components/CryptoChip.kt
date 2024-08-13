@@ -4,6 +4,7 @@ import android.dev.cryptotrackerapp.ui.screen.crypto_list.CryptoListTab
 import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme
 import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme.colors
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -26,15 +27,16 @@ interface UIModel {
 
 
 @Composable
-fun <T : UIModel> AppChip(
+fun <T : UIModel> CryptoChip(
     selectedItem : T,
     items : ImmutableList<T>,
     onItemClick : (T) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
-    // TODO#9: Добавить кликейбл группу для обработки нажатия
+
     Row(
-        modifier = modifier,
+        modifier = modifier.clickable(onClick = onClick),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items.forEach { item ->
@@ -61,10 +63,11 @@ fun <T : UIModel> AppChip(
 @Composable
 fun AppChipPreview() {
     ApplicationTheme {
-        AppChip(
+        CryptoChip(
             selectedItem = CryptoListTab.USD,
             items = CryptoListTab.entries.toImmutableList(),
-            onItemClick = {}
+            onItemClick = {},
+            onClick = {}
         )
     }
 }

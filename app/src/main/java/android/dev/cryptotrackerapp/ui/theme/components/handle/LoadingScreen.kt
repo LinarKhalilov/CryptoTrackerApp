@@ -1,12 +1,15 @@
 package android.dev.cryptotrackerapp.ui.theme.components.handle
 
+import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme
 import android.dev.cryptotrackerapp.ui.theme.ApplicationTheme.colors
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun LoadingScreen(
@@ -18,8 +21,14 @@ fun LoadingScreen(
             .background(colors.backgroundColor),
         contentAlignment = Alignment.Center
     ) {
-        // TODO#2 Circular Indicator с цветом colors.primaryColor
+        CircularProgressIndicator(color = colors.primaryColor)
     }
 }
 
-//TODO#4 Сделать превью
+@Preview(showBackground = true)
+@Composable
+fun LoadingScreenPreview() {
+    ApplicationTheme {
+        LoadingScreen()
+    }
+}
