@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CryptoTracker</string>
+    <string name="crypto_list_title">Список криптовалют</string>
+    <string name="coin_details_description">Описание</string>"
+    <string name="coin_details_categories">Категории</string>
+    <string name="some_error">Произошла какая-то ошибка :( \n Попробуем снова?</string>
+    <string name="try_again">ПОПРОБОВАТЬ</string>
+</resources>
