@@ -55,6 +55,11 @@ android {
 
 dependencies {
 
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation (libs.androidx.paging.runtime)
+
     implementation(libs.coil.compose)
     implementation(libs.mvi.orbit)
     implementation(libs.mvi.orbit.compose)

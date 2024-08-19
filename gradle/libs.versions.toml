@@ -7,6 +7,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 kotlinxCollectionsImmutable = "0.3.7"
 lifecycleRuntimeKtx = "2.8.4"
+kotlinxSerializationJson = "1.6.2"
 activityCompose = "1.9.1"
 composeBom = "2024.06.00"
 
@@ -17,6 +18,7 @@ material3 = "1.2.1"
 retrofit = "2.11.0"
 converterGson = "2.9.0"
 ksp = "2.0.0-1.0.23"
+pagingRuntime = "3.3.2"
 
 coil = "2.7.0"
 
@@ -28,7 +30,11 @@ navigationCompose = "2.7.7"
 
 [libraries]
 
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingRuntime" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationJson" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomCompiler" }
